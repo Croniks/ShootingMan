@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private PlayerEvents _playerEvents;
     private bool _isShootingArea = false;
+    private bool _isShooting = false;
     
     
     private void Awake()
@@ -38,19 +39,20 @@ public class PlayerController : MonoBehaviour
             if(Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, _layerMask))
             {
                 _navMeshAgent.SetDestination(hit.point);
+                _isShooting = false;
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Mouse1))
+        else if(Input.GetKey(KeyCode.Mouse1))
         {
-            //Debug.Log($"[{GetType()}.{nameof(Update)}] isShootingArea: {_isShootingArea}");
-
-            if(_isShootingArea)
-            {
-                _animator.SetTrigger("StartFiringTrigger");
-            }
+            _isShooting = true;
         }
-
+        else if(Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            _isShooting = false;
+        }
+        
         _animator.SetBool("IsWalking", _navMeshAgent.velocity.magnitude > 0.5f);
+        _animator.SetBool("IsShooting", _isShooting && _isShootingArea);
     }
     
     private void OnCrossingShootingZone(bool isShootingArea)
