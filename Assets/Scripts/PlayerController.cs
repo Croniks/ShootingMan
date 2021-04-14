@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] LayerMask _layerMask;
     private Camera _mainCamera;
+    private Transform _selfTransform;
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
     private PlayerEvents _playerEvents;
+    private float _rotatingDamping = 5f;
     private bool _isShootingArea = false;
     private bool _isShooting = false;
     
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _mainCamera = Camera.main;
+        _selfTransform = GetComponent<Transform>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _playerEvents = EventsProvider.Get<PlayerEvents>();
@@ -39,12 +42,21 @@ public class PlayerController : MonoBehaviour
             if(Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, _layerMask))
             {
                 _navMeshAgent.SetDestination(hit.point);
+                _navMeshAgent.isStopped = false;
                 _isShooting = false;
             }
         }
         else if(Input.GetKey(KeyCode.Mouse1))
         {
-            _isShooting = true;
+            RaycastHit hit;
+            if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, _layerMask) && _isShootingArea)
+            {
+                var lookPos = hit.point - _selfTransform.position;
+                lookPos.y = 0;
+                _selfTransform.rotation = Quaternion.LookRotation(lookPos);
+                _navMeshAgent.isStopped = true;
+                _isShooting = true;
+            }
         }
         else if(Input.GetKeyUp(KeyCode.Mouse1))
         {
@@ -59,5 +71,10 @@ public class PlayerController : MonoBehaviour
     {
         _isShootingArea = isShootingArea;
         _animator.SetBool("IsShootingArea", _isShootingArea);
+    }
+
+    private void OnPlayerShoot()
+    {
+        Debug.Log($"[{GetType()}.{nameof(OnPlayerShoot)}] Fire!");
     }
 }
