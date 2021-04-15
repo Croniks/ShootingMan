@@ -10,6 +10,7 @@ using CustomEvents;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] LayerMask _layerMask;
+    [SerializeField] private Transform _gunTransform;
     private Camera _mainCamera;
     private Transform _selfTransform;
     private NavMeshAgent _navMeshAgent;
@@ -51,9 +52,10 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, _layerMask) && _isShootingArea)
             {
-                var lookPos = hit.point - _selfTransform.position;
-                lookPos.y = 0;
-                _selfTransform.rotation = Quaternion.LookRotation(lookPos);
+                Vector3 relative = _selfTransform.InverseTransformPoint(hit.point);
+                float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                _selfTransform.Rotate(0, angle, 0);
+                
                 _navMeshAgent.isStopped = true;
                 _isShooting = true;
             }
