@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using CustomEvents;
+using Providers.Events;
 
 
 [RequireComponent(typeof(NavMeshAgent))] 
@@ -10,13 +8,11 @@ using CustomEvents;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] LayerMask _layerMask;
-    [SerializeField] private Transform _gunTransform;
     private Camera _mainCamera;
     private Transform _selfTransform;
     private NavMeshAgent _navMeshAgent;
     private Animator _animator;
     private PlayerEvents _playerEvents;
-    private float _rotatingDamping = 5f;
     private bool _isShootingArea = false;
     private bool _isShooting = false;
     
@@ -77,6 +73,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnPlayerShoot()
     {
-        Debug.Log($"[{GetType()}.{nameof(OnPlayerShoot)}] Fire!");
+        //Debug.Log($"[{GetType()}.{nameof(OnPlayerShoot)}] Fire!");
+        _playerEvents.PlayerShoot?.Invoke();
     }
 }

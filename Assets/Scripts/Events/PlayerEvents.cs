@@ -1,10 +1,11 @@
 ﻿using System;
 
 
-namespace CustomEvents
+namespace Providers.Events
 {
     class PlayerEvents : IEventStorage
     {
         public Action<bool> IsInShootZone;
+        public Action PlayerShoot;
     }
 }

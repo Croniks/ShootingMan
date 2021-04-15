@@ -4,23 +4,25 @@ using UnityEngine;
 using Providers.Events;
 
 
-public class ShootingZone : MonoBehaviour
+public class ShootingManager : MonoBehaviour
 {
     private PlayerEvents _playerEvents;
+    private Transform _shotsSourceTransform;
 
 
     private void Awake()
     {
         _playerEvents = EventsProvider.Get<PlayerEvents>();
+        _shotsSourceTransform = GetComponent<Transform>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    void Start()
     {
-        _playerEvents.IsInShootZone?.Invoke(true);
+        _playerEvents.PlayerShoot += OnPlayerShoot;
     }
-    
-    private void OnTriggerExit(Collider other)
+
+    private void OnPlayerShoot()
     {
-        _playerEvents.IsInShootZone?.Invoke(false);
+        
     }
 }
