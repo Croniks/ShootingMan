@@ -32,14 +32,7 @@ public class ShootingManager : MonoBehaviour
 
         if(bullet != null)
         {
-            bullet.Setup(_shotsSourceTransform.position, CalculateDirection(bullet, bulletDestination), _bulletsPool);
+            bullet.Setup(_shotsSourceTransform.position, (bulletDestination - _shotsSourceTransform.position).normalized, _bulletsPool);
         }
-    }
-
-    private Vector3 CalculateDirection(Bullet bullet, Vector3 bulletDestination)
-    {
-        
-        
-        return default;
     }
 }

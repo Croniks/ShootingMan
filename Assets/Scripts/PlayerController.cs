@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnPlayerShoot()
     {
-        //Debug.Log($"[{GetType()}.{nameof(OnPlayerShoot)}] Fire!");
         _playerEvents.PlayerShoot?.Invoke(_bulletDestination);
     }
 }
