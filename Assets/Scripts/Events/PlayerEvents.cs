@@ -8,5 +8,6 @@ namespace Providers
     {
         public Action<bool> IsInShootZone;
         public Action<Vector3> PlayerShoot;
+        public Action<Vector3> DoExplosion;
     }
 }

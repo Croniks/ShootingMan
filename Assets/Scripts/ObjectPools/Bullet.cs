@@ -6,17 +6,19 @@ using Providers;
 
 public class Bullet : MonoBehaviour
 {
-    private float _bulletSpeed = 10f;
+    private float _bulletSpeed = 20f;
     private Transform _selfTransform;
     private GameObject _selfGameObject;
     private Vector3 _shootDirection;
     BulletsPool<Bullet> _pool;
+    private PlayerEvents _playerEvents;
 
 
     private void Awake()
     {
         _selfTransform = transform;
         _selfGameObject = gameObject;
+        _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
     }
     
     public void Setup(Vector3 initialPosition, Vector3 shootDirection, BulletsPool<Bullet> pool)
@@ -36,9 +38,8 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter()
     {
-        // Делаем что-нибудь при попадании
-        Debug.Log($"[{GetType()}.{nameof(OnTriggerEnter)}] explosion point: {_selfTransform.position}");
         _selfGameObject.SetActive(false);
         _pool.ReturnToPool(this);
+        _playerEvents.DoExplosion?.Invoke(_selfTransform.position);
     }
 }

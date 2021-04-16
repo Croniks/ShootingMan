@@ -38,9 +38,7 @@ public class PlayerController : MonoBehaviour
         {
             RaycastHit hit;
             if(Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _layerMask))
-            {
-                Debug.Log(hit.collider.name);
-
+            { 
                 _navMeshAgent.SetDestination(hit.point);
                 _navMeshAgent.isStopped = false;
                 _isShooting = false;
