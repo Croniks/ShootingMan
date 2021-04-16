@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 
 namespace Providers
@@ -6,6 +7,6 @@ namespace Providers
     class PlayerEvents : IProviderContent
     {
         public Action<bool> IsInShootZone;
-        public Action PlayerShoot;
+        public Action<Vector3> PlayerShoot;
     }
 }

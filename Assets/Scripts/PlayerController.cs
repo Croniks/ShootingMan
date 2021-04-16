@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
     private PlayerEvents _playerEvents;
     private bool _isShootingArea = false;
     private bool _isShooting = false;
+    private Vector3 _bulletDestination;
     
-    
+
     private void Awake()
     {
         _mainCamera = Camera.main;
@@ -48,6 +49,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, _layerMask) && _isShootingArea)
             {
+                _bulletDestination = hit.point;
                 Vector3 relative = _selfTransform.InverseTransformPoint(hit.point);
                 float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
                 _selfTransform.Rotate(0, angle, 0);
@@ -74,6 +76,6 @@ public class PlayerController : MonoBehaviour
     private void OnPlayerShoot()
     {
         //Debug.Log($"[{GetType()}.{nameof(OnPlayerShoot)}] Fire!");
-        _playerEvents.PlayerShoot?.Invoke();
+        _playerEvents.PlayerShoot?.Invoke(_bulletDestination);
     }
 }

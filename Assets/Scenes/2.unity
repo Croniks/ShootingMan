@@ -770,6 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c808dcd1c069024e93174fe19be6b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 1999263330}
+  _bulletsCount: 50
 --- !u!1 &1988801552
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +884,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1999263330 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5351831518253729680, guid: dd6ca61830d91184c8a1f14d0fe2deff, type: 3}
+  m_PrefabInstance: {fileID: 293475223}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1c3065785cb7d41b931c0a41b49e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2125712359
 GameObject:
   m_ObjectHideFlags: 0
