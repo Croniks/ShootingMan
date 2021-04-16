@@ -37,8 +37,10 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit hit;
-            if(Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, _layerMask))
+            if(Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _layerMask))
             {
+                Debug.Log(hit.collider.name);
+
                 _navMeshAgent.SetDestination(hit.point);
                 _navMeshAgent.isStopped = false;
                 _isShooting = false;
@@ -47,7 +49,7 @@ public class PlayerController : MonoBehaviour
         else if(Input.GetKey(KeyCode.Mouse1))
         {
             RaycastHit hit;
-            if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, _layerMask) && _isShootingArea)
+            if (Physics.Raycast(_mainCamera.ScreenPointToRay(Input.mousePosition), out hit, Mathf.Infinity, _layerMask) && _isShootingArea)
             {
                 _bulletDestination = hit.point;
                 Vector3 relative = _selfTransform.InverseTransformPoint(hit.point);

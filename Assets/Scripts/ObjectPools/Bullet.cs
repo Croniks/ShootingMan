@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter()
     {
         // Делаем что-нибудь при попадании
-        
+        Debug.Log($"[{GetType()}.{nameof(OnTriggerEnter)}] explosion point: {_selfTransform.position}");
         _selfGameObject.SetActive(false);
         _pool.ReturnToPool(this);
     }
