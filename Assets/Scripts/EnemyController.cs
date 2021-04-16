@@ -20,6 +20,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody _rigidBody;
     private Settings _settings;
     private float _explosionForce;
+    private float _explosionRadius;
 
 
     private void Awake()
@@ -36,6 +37,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         _explosionForce = _settings.bulletPower;
+        _explosionRadius = _settings.bulletHittingRadius;
         _playerEvents.DoExplosion += OnDoExplosion;
 
         if (_destinationPoints.Count > 0)
@@ -66,13 +68,13 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log($"[{GetType()}.{nameof(OnDoExplosion)}] explosion point: {_selfTransform.position}");
 
-        if(Vector3.Distance(_selfTransform.position, explosionPoint) < 20f)
+        if(Vector3.Distance(_selfTransform.position, explosionPoint) < _explosionRadius)
         {
             this.enabled = false;
             _navMeshAgent.enabled = false;
             _animator.enabled = false;
 
-            _rigidBody.AddExplosionForce(_explosionForce, explosionPoint, 10f, 5f);
+            _rigidBody.AddExplosionForce(_explosionForce, explosionPoint, _explosionRadius, 5f);
         }
     }
 

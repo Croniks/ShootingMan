@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _navMeshAgent.speed = _settings.playerSpeed;
+        _animator.SetFloat("Speed", (float)_settings.fireSpeed);
         _playerEvents.IsInShootZone += OnCrossingShootingZone;
     }
     
@@ -89,18 +90,5 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         _playerEvents.IsInShootZone -= OnCrossingShootingZone;
-    }
-
-    private void SetShootingAnimationSpeed()
-    {
-        //_animator.runtimeAnimatorController.
-        //foreach (var animation in _animator.Get)
-        //{
-        //    //animation.clip.
-        //    //if(animation.name.Equals("Shooting"))
-        //    //{
-        //    //    animation.
-        //    //}
-        //}
     }
 }

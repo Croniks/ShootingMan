@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca5f538b9816e04096d763676839f26, type: 3}
   m_Name: Settings
   m_EditorClassIdentifier: 
-  bulletPower: 100
-  playerSpeed: 11.32
-  fireSpeed: 5
+  bulletPower: 21.8
+  bulletSpeed: 34.3
+  bulletHittingRadius: 10
+  playerSpeed: 15.09
+  fireSpeed: 2

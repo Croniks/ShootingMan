@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     private Vector3 _shootDirection;
     BulletsPool<Bullet> _pool;
     private PlayerEvents _playerEvents;
+    private Settings _settings;
 
 
     private void Awake()
@@ -19,11 +20,13 @@ public class Bullet : MonoBehaviour
         _selfTransform = transform;
         _selfGameObject = gameObject;
         _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
+        _settings = Resources.Load<Settings>("Settings/Settings");
     }
     
     public void Setup(Vector3 initialPosition, Vector3 shootDirection, BulletsPool<Bullet> pool)
     {
         _pool = pool;
+        _bulletSpeed = _settings.bulletSpeed;
         _selfTransform.position = initialPosition;
         _selfTransform.rotation = Quaternion.LookRotation(shootDirection);
         _selfTransform.rotation = Quaternion.FromToRotation(Vector3.up, _selfTransform.forward);
