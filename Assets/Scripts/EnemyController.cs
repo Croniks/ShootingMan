@@ -60,7 +60,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDoExplosion(Vector3 explosionPoint)
     {
-        Debug.Log($"[{GetType()}.{nameof(OnDoExplosion)}] explosion point: {_selfTransform.position}");
+        //Debug.Log($"[{GetType()}.{nameof(OnDoExplosion)}] explosion point: {_selfTransform.position}");
 
         if(Vector3.Distance(_selfTransform.position, explosionPoint) < 20f)
         {
@@ -70,5 +70,10 @@ public class EnemyController : MonoBehaviour
 
             _rigidBody.AddExplosionForce(50f, explosionPoint, 20f, 10f);
         }
+    }
+
+    private void OnDisable()
+    {
+        _playerEvents.DoExplosion -= OnDoExplosion;
     }
 }

@@ -27,6 +27,15 @@ public class PlayerController : MonoBehaviour
         _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
     }
 
+    private void OnEnable()
+    {
+        _mainCamera = Camera.main;
+        _selfTransform = GetComponent<Transform>();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
+        _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
+    }
+
     private void Start()
     {
         _playerEvents.IsInShootZone += OnCrossingShootingZone;
@@ -65,6 +74,11 @@ public class PlayerController : MonoBehaviour
         
         _animator.SetBool("IsWalking", _navMeshAgent.velocity.magnitude > 0.5f);
         _animator.SetBool("IsShooting", _isShooting && _isShootingArea);
+
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            Debug.Log($"[{GetType()}.{nameof(Update)}] animator: {_animator != null}");
+        }
     }
     
     private void OnCrossingShootingZone(bool isShootingArea)
@@ -76,5 +90,10 @@ public class PlayerController : MonoBehaviour
     private void OnPlayerShoot()
     {
         _playerEvents.PlayerShoot?.Invoke(_bulletDestination);
+    }
+
+    private void OnDisable()
+    {
+        _playerEvents.IsInShootZone -= OnCrossingShootingZone;
     }
 }

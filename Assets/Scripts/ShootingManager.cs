@@ -35,4 +35,9 @@ public class ShootingManager : MonoBehaviour
             bullet.Setup(_shotsSourceTransform.position, (bulletDestination - _shotsSourceTransform.position).normalized, _bulletsPool);
         }
     }
+
+    private void OnDisable()
+    {
+        _playerEvents.PlayerShoot -= OnPlayerShoot;
+    }
 }
