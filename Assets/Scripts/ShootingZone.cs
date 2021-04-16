@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Providers.Events;
+using Providers;
 
 
 public class ShootingZone : MonoBehaviour
@@ -11,7 +11,7 @@ public class ShootingZone : MonoBehaviour
 
     private void Awake()
     {
-        _playerEvents = EventsProvider.Get<PlayerEvents>();
+        _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
     }
 
     private void OnTriggerEnter(Collider other)

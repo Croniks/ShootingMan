@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Providers.Events;
+using Providers;
 
 
 public class ShootingManager : MonoBehaviour
@@ -12,7 +12,7 @@ public class ShootingManager : MonoBehaviour
 
     private void Awake()
     {
-        _playerEvents = EventsProvider.Get<PlayerEvents>();
+        _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
         _shotsSourceTransform = GetComponent<Transform>();
     }
 

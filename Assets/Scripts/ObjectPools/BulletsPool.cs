@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Providers.ObjectPools
+namespace Providers
 {
-    public class BulletsPool : IObjectPool
+    public class BulletsPool : IProviderContent
     {
-        
+        private Stack<Bullet> _bulletsStack;
+
+
     }
 }

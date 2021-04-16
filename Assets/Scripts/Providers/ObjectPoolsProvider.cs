@@ -1,5 +1,4 @@
-﻿namespace Providers.ObjectPools
+﻿namespace Providers
 {
-    public interface IObjectPool { }
-    public class ObjectPoolsProvider : AbstractProvider<IObjectPool> { }
+    public class ObjectPoolsProvider : Provider { }
 }

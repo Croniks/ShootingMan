@@ -1,9 +1,9 @@
 ﻿using System;
 
 
-namespace Providers.Events
+namespace Providers
 {
-    class PlayerEvents : IEventStorage
+    class PlayerEvents : IProviderContent
     {
         public Action<bool> IsInShootZone;
         public Action PlayerShoot;

@@ -1,5 +1,4 @@
-namespace Providers.Events
+namespace Providers
 {
-    public interface IEventStorage { }
-    public class EventsProvider : AbstractProvider<IEventStorage> { }
+    public class EventsProvider : Provider { }
 }

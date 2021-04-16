@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using Providers.Events;
+using Providers;
 
 
 [RequireComponent(typeof(NavMeshAgent))] 
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
         _selfTransform = GetComponent<Transform>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        _playerEvents = EventsProvider.Get<PlayerEvents>();
+        _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
     }
 
     private void Start()
