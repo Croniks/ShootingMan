@@ -128,7 +128,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 7cde652413ce2ce439f3cb713de01728, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: IsWalking
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1101 &-5063402248330441101
@@ -237,7 +237,7 @@ AnimatorState:
   m_SpeedParameter: Blend
   m_MirrorParameter: 
   m_CycleOffsetParameter: Blend
-  m_TimeParameter: Blend
+  m_TimeParameter: Speed
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0
@@ -273,6 +273,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: IsShooting
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Speed
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -452,3 +458,16 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &9119204930704031086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb0a114992ef074d8ec4d402d8c3d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0

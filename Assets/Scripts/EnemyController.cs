@@ -18,6 +18,8 @@ public class EnemyController : MonoBehaviour
     private Transform _selfTransform;
     private PlayerEvents _playerEvents;
     private Rigidbody _rigidBody;
+    private Settings _settings;
+    private float _explosionForce;
 
 
     private void Awake()
@@ -28,10 +30,12 @@ public class EnemyController : MonoBehaviour
         _selfTransform = GetComponent<Transform>();
         _rigidBody = GetComponent<Rigidbody>();
         _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
+        _settings = Resources.Load<Settings>("Settings/Settings");
     }
 
     private void Start()
     {
+        _explosionForce = _settings.bulletPower;
         _playerEvents.DoExplosion += OnDoExplosion;
 
         if (_destinationPoints.Count > 0)
@@ -68,7 +72,7 @@ public class EnemyController : MonoBehaviour
             _navMeshAgent.enabled = false;
             _animator.enabled = false;
 
-            _rigidBody.AddExplosionForce(50f, explosionPoint, 20f, 10f);
+            _rigidBody.AddExplosionForce(_explosionForce, explosionPoint, 10f, 5f);
         }
     }
 

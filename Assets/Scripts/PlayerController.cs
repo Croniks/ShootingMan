@@ -16,8 +16,9 @@ public class PlayerController : MonoBehaviour
     private bool _isShootingArea = false;
     private bool _isShooting = false;
     private Vector3 _bulletDestination;
+    private Settings _settings;
+   
     
-
     private void Awake()
     {
         _mainCamera = Camera.main;
@@ -25,19 +26,12 @@ public class PlayerController : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
         _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
+        _settings = Resources.Load<Settings>("Settings/Settings");  
     }
-
-    private void OnEnable()
-    {
-        _mainCamera = Camera.main;
-        _selfTransform = GetComponent<Transform>();
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-        _animator = GetComponent<Animator>();
-        _playerEvents = ProvidersStorage.GetProvider<EventsProvider>().Get<PlayerEvents>();
-    }
-
+    
     private void Start()
     {
+        _navMeshAgent.speed = _settings.playerSpeed;
         _playerEvents.IsInShootZone += OnCrossingShootingZone;
     }
     
@@ -95,5 +89,18 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         _playerEvents.IsInShootZone -= OnCrossingShootingZone;
+    }
+
+    private void SetShootingAnimationSpeed()
+    {
+        //_animator.runtimeAnimatorController.
+        //foreach (var animation in _animator.Get)
+        //{
+        //    //animation.clip.
+        //    //if(animation.name.Equals("Shooting"))
+        //    //{
+        //    //    animation.
+        //    //}
+        //}
     }
 }
