@@ -16,4 +16,4 @@ MonoBehaviour:
   bulletSpeed: 34.3
   bulletHittingRadius: 10
   playerSpeed: 15.09
-  fireSpeed: 2
+  fireSpeed: 5

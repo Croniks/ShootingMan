@@ -17,13 +17,12 @@ namespace Providers
             _isFixedSize = isFixedSize;
             _prefab = prefab;
             _bulletsStack = new Stack<T>(count);
-            GameObject gameObj = prefab.gameObject;
-
+            
             for (int i = 0; i < count; i++)
             {
-                GameObject bulletObject = GameObject.Instantiate(gameObj);
-                _bulletsStack.Push(bulletObject.GetComponent<T>());
-                bulletObject.SetActive(false);
+                T bullet = GameObject.Instantiate<T>(_prefab);
+                _bulletsStack.Push(bullet);
+                bullet.gameObject.SetActive(false);
             }
         }
         
@@ -37,7 +36,7 @@ namespace Providers
             {
                 if(!_isFixedSize)
                 {
-                    return GameObject.Instantiate(_prefab).GetComponent<T>();
+                    return GameObject.Instantiate<T>(_prefab);
                 }
                 
                 return null;
